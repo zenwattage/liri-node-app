@@ -17,7 +17,7 @@
  npm install 
  git add . && git commit -m 'installed node modules'
  git push
- 
+
  ```
 
 * [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
@@ -29,3 +29,27 @@
 * [Moment](https://www.npmjs.com/package/moment)
 
 * [DotEnv](https://www.npmjs.com/package/dotenv)
+
+
+## Usage
+
+Replace the contents of `README.md` with your project's:
+
+- Name
+- Description
+- Installation instructions
+- Usage instructions
+- Support instructions
+- Contributing instructions
+
+Feel free to remove any sections that aren't applicable to your project.
+
+## Support
+
+Please [open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
+
+## Contributing
+
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/fraction/readme-boilerplate/compare/).
+Window size: 1280 x 773
+Viewport size: 1280 x 636
