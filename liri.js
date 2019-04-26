@@ -10,12 +10,21 @@ var keys = require("./keys.js");
 // moment npm for date formatting
 var moment = require('moment');
 
-//moment().format();
+// omdb url
+//"http://www.omdbapi.com/?q=songTitle&apikey=trilogy";
 
 //var spotify = new Spotify(keys.spotify);
-console.log(process.argv[2]);
+//console.log(process.argv[2]);
 
 //concert-this
+
+//function to bandsintown api
+//axios call
+
+
+
+
+
 //spotify-this-song
 //movie-this
 //do-what-it-says 
