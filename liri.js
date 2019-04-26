@@ -1,12 +1,15 @@
 // our local environmental config file - gitignored
 require("dotenv").config();
 
-// axios required for calls to the various API's
-const axios = require('axios');
-// file system interaction package
-const fs = require('fs');
 // gitignored keys for apis
 var keys = require("./keys.js");
+
+// axios required for calls to the various API's
+const axios = require('axios');
+
+// file system interaction package
+const fs = require('fs');
+
 // moment npm for date formatting
 var moment = require('moment');
 
@@ -19,10 +22,22 @@ var moment = require('moment');
 //concert-this
 
 //function to bandsintown api
-//axios call
+//axios get call 
+/* 
+function concertThis() {
 
+    //axios call to 
 
+}
+ */
 
+ // Then run a request with axios to the OMDB API with the movie specified
+axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
+    function(response) {
+      console.log("The movie's rating is: " + response.data.imdbRating);
+    }
+  );
+  
 
 
 //spotify-this-song
