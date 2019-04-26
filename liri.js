@@ -7,14 +7,18 @@ var keys = require("./keys.js");
 // axios required for calls to the various API's
 const axios = require('axios');
 
+// node-spotify-api for search and request methods (thanks Denis)
+var Spotify = require('node-spotify-api');
+
 // file system interaction package
 const fs = require('fs');
 
 // moment npm for date formatting
 var moment = require('moment');
 
-// omdb url
-//"http://www.omdbapi.com/?q=songTitle&apikey=trilogy";
+
+//omdb
+// http://www.omdbapi.com/?i=tt3896198&apikey=2e1c1418
 
 //var spotify = new Spotify(keys.spotify);
 //console.log(process.argv[2]);
