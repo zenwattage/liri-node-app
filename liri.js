@@ -20,7 +20,18 @@ var moment = require('moment');
 //omdb
 // http://www.omdbapi.com/?i=tt3896198&apikey=2e1c1418
 
-//var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
+console.log(spotify);
+
+
+spotify
+  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+  .then(function(data) {
+    console.log(data); 
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
 //console.log(process.argv[2]);
 
 //concert-this
