@@ -66,29 +66,33 @@ function spotifyThisSong(song) {
 
     spotify
         .search({ type: 'track', query: song })
-        .then(function (response) {
-            console.log(response);
+        .then(function(data) {
+        console.log(data); 
         })
-        .catch(function (err) {
-            console.log(err);
-        });
+        .catch(function(err) {
+        console.error('Error occurred: ' + err);
+    })
+    ;
+}
+
+spotifyThisSong("Follow the Sun");
 
 
     //movie-this
 
     // Then run a request with axios to the OMDB API with the movie specified
-    axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
-        function (response) {
-            console.log("The movie's rating is: " + response.data.imdbRating);
-        })
-        .catch(function (error) {
-            console.log(error);
-        }
-        );
+axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
+    function (response) {
+        console.log("The movie's rating is: " + response.data.imdbRating);
+    })
+    .catch(function (error) {
+        console.log(error);
+    }
+    );
 
 
 //do-what-it-says 
-
+/* 
 
 //control for which process.argv[2] gets entered
 // choice = process.argv[2];
@@ -102,4 +106,5 @@ function spotifyThisSong(song) {
 //     case "concert-this":
 //     concertThis(artist);
 //     break;etc
-// }
+
+ */
