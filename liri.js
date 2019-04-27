@@ -9,20 +9,23 @@ const axios = require('axios');
 
 // node-spotify-api for search and request methods (thanks Denis Molloy)
 var Spotify = require('node-spotify-api');
-//create spotify object
+//create spotify object with keys linked
 var spotify = new Spotify(keys.spotify);
+
 // file system interaction package
 const fs = require('fs');
+
 // moment npm for date formatting
 var moment = require('moment');
 
 //bandsintown
 //"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
 
-
 //omdb
 // http://www.omdbapi.com/?i=tt3896198&apikey=2e1c1418
 
+//default movie = Mr. Nobody
+// <http://www.imdb.com/title/tt0485947/>
 
 
 //console.log(process.argv[2]);
@@ -31,13 +34,19 @@ var moment = require('moment');
 
 //function to call bandsintown api
 //axios get call 
-/* 
-function concertThis() {
 
-    //axios call to 
+function concertThis(artist) {
+
+    //axios call to  bandsintown api
+    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+    .then( function(response) {
+        console.log(reponse);
+
+    })
+
 
 }
- */
+
 
   
 
@@ -65,3 +74,17 @@ spotify
 
 //do-what-it-says 
 
+
+//control for which process.argv[2] gets entered
+// choice = process.argv[2];
+// if (choice === concert-this){
+//     concertThis(artis)
+// } else if (),etc
+
+
+// or switch case
+// switch(choice) {
+//     case "concert-this":
+//     concertThis(artist);
+//     break;etc
+// }
