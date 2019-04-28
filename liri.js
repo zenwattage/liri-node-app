@@ -25,10 +25,6 @@ var moment = require('moment');
 //omdb
 // http://www.omdbapi.com/?i=tt3896198&apikey=2e1c1418
 
-//default movie = Mr. Nobody
-// <http://www.imdb.com/title/tt0485947/>
-
-
 //console.log(process.argv[2]);
 
 //concert-this
@@ -76,7 +72,7 @@ function spotifyThisSong(song) {
         .search(
         {
             type: "track",
-            query: songName
+            query: song
         },
         function (err, data) {
             if (err) {
@@ -99,12 +95,25 @@ function spotifyThisSong(song) {
 };
 
 
+
+
+
+
+
+
 //movie-this
 
 function movieThis(movie) {
+
+    //default movie = Mr Nobody
+// <http://www.imdb.com/title/tt0485947/>
+if(movie = "") {
+    movie = "Mr Nobody";
+}
 // Then run a request with axios to the OMDB API with the movie specified
-axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
+axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
     function (response) {
+        console.log(response.data);
         console.log("The movie's rating is: " + response.data.imdbRating);
     })
     .catch(function (error) {
@@ -112,6 +121,39 @@ axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=tr
     }
     );//end of spotify-this
 };
+
+
+
+
+
+
+
+
++
 //user choice 
 
-var 
+function userChoice (caseData, functionData){
+    switch (caseData) {
+    case "concert-this":
+        concertThis(functionData);
+        break;
+    case "spotify-this-song":
+        spotifyThisSong(functionData);
+        break;
+    case "movie-this":
+        movieThis(functionData);
+        break;
+    // case "do-what-it-says":
+    //     doWhatItSays(functionData);
+    //     break;
+    default:
+        console.log("My responses are limited.");
+    }
+};
+
+//get choice to pass to userChoice
+function getChoice(argOne, argTwo) {
+    userChoice(argOne, argTwo);
+};
+
+getChoice(process.argv[2], process.argv.slice(3).join(" "));
