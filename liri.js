@@ -57,26 +57,13 @@ function concertThis(artist) {
 //concertThis("Blink182");
 
 
-
+//get name of artist
+var artistName = function(artist) {
+    return artist.name;
+};
 
 //spotify-this-song
-/* 
-* This will show the following information about the song in your terminal/bash window
-
-     * Artist(s)
-
-     * The song's name
-
-     * A preview link of the song from Spotify
-
-     * The album that the song is from
-
-   * If no song is provided then your program will default to "The Sign" by Ace of Base.
-
- */
-
-
- //spotify
+//spotify
 function spotifyThisSong(song) {
 
     //* If no song is provided then your program will default to "The Sign" by Ace of Base.
@@ -86,50 +73,42 @@ function spotifyThisSong(song) {
 
 
     spotify
-        .search({
+        .search(
+        {
             type: "track",
             query: songName
-        }, function (err, data) {
+        },
+        function (err, data) {
             if (err) {
                 console.log("Error occurred: " + err);
                 return;
             }
 
-    var songs = data.tracks.items;
-    var data = [];
+            var tracks = data.tracks.items;
 
-
-    //movie-this
-
-    // Then run a request with axios to the OMDB API with the movie specified
-    axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
-        function (response) {
-            console.log("The movie's rating is: " + response.data.imdbRating);
-        })
-        .catch(function (error) {
-            console.log(error);
+            for (var i = 0; i < tracks; i++) {
+                console.log(i);
+                console.log("Artist: " + songs[i].artists.map(artistName));
+                console.log("Song: " + songs[i].name);
+                console.log("Preview URL: " + songs[i].preview_url);
+                console.log("Album: " + songs[i].album.name);
+            }
         }
         );
-
-    });//end of spotify-this
-
-
-}
-
-//do-what-it-says 
-/*
-
-//control for which process.argv[2] gets entered
-// choice = process.argv[2];
-// if (choice === concert-this){
-//     concertThis(artis)
-// } else if (),etc
+};
 
 
-// or switch case
-// switch(choice) {
-//     case "concert-this":
-//     concertThis(artist);
-//     break;etc
+//movie-this
 
- */
+// Then run a request with axios to the OMDB API with the movie specified
+axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
+    function (response) {
+        console.log("The movie's rating is: " + response.data.imdbRating);
+    })
+    .catch(function (error) {
+        console.log(error);
+    }
+    );//end of spotify-this
+
+//user choice 
+
