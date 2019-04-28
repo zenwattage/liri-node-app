@@ -7,9 +7,11 @@ var keys = require("./keys.js");
 // axios required for calls to the various API's
 const axios = require('axios');
 
-// node-spotify-api for search and request methods (thanks Denis Molloy)
+// node-spotify-api for search and request methods 
 var Spotify = require('node-spotify-api');
 
+//create spotify object with keys linked
+var spotify = new Spotify(keys.spotify);
 
 // file system interaction package
 const fs = require('fs');
@@ -58,41 +60,64 @@ function concertThis(artist) {
 
 
 //spotify-this-song
+/* 
+* This will show the following information about the song in your terminal/bash window
 
+     * Artist(s)
+
+     * The song's name
+
+     * A preview link of the song from Spotify
+
+     * The album that the song is from
+
+   * If no song is provided then your program will default to "The Sign" by Ace of Base.
+
+ */
+
+
+ //spotify
 function spotifyThisSong(song) {
-    //create spotify object with keys linked
-    var spotify = new Spotify(keys.spotify);
+
+    //* If no song is provided then your program will default to "The Sign" by Ace of Base.
+    if (song === "") {
+        song = "The Sign";
+    }
 
 
     spotify
-        .search({ type: 'track', query: song })
-        .then(function(data) {
-        console.log(data); 
-        })
-        .catch(function(err) {
-        console.error('Error occurred: ' + err);
-    })
-    ;
-}
+        .search({
+            type: "track",
+            query: songName
+        }, function (err, data) {
+            if (err) {
+                console.log("Error occurred: " + err);
+                return;
+            }
 
-spotifyThisSong("Follow the Sun");
+    var songs = data.tracks.items;
+    var data = [];
 
 
     //movie-this
 
     // Then run a request with axios to the OMDB API with the movie specified
-axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
-    function (response) {
-        console.log("The movie's rating is: " + response.data.imdbRating);
-    })
-    .catch(function (error) {
-        console.log(error);
-    }
-    );
+    axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
+        function (response) {
+            console.log("The movie's rating is: " + response.data.imdbRating);
+        })
+        .catch(function (error) {
+            console.log(error);
+        }
+        );
 
+    });//end of spotify-this
+
+
+}
 
 //do-what-it-says 
-/* 
+/*
 
 //control for which process.argv[2] gets entered
 // choice = process.argv[2];
