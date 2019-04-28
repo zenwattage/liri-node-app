@@ -88,6 +88,7 @@ function spotifyThisSong(song) {
 
             for (var i = 0; i < tracks; i++) {
                 console.log(i);
+
                 console.log("Artist: " + songs[i].artists.map(artistName));
                 console.log("Song: " + songs[i].name);
                 console.log("Preview URL: " + songs[i].preview_url);
@@ -100,6 +101,7 @@ function spotifyThisSong(song) {
 
 //movie-this
 
+function movieThis(movie) {
 // Then run a request with axios to the OMDB API with the movie specified
 axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy").then(
     function (response) {
@@ -109,6 +111,7 @@ axios.get("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=tr
         console.log(error);
     }
     );//end of spotify-this
-
+};
 //user choice 
 
+var 
