@@ -1,3 +1,6 @@
+
+
+
 // our local environmental config file - gitignored
 require("dotenv").config();
 
@@ -27,127 +30,150 @@ var moment = require('moment');
 
 //console.log(process.argv[2]);
 
-//concert-this
+console.log("-----The commands available are below -----");
+console.log("\n   concert-this <band name>");
+console.log("\n   spotify-this-song <song name> ");
+console.log("\n   movie-this <movie name> ");
+console.log("\n");
+console.log("\n *** end of menu ***")
+console.log("\n");
 
-//function to call bandsintown api
-//axios get call 
-/* 
-function concertThis(artist) {
-    //axios call to  bandsintown api
-    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
-        .then(function (response) {
-            //console.log(response);
-            //console.log(response.data);
-            //iterate over response object to get name/location/date of event
-            for (key of response.data) {
-                console.log("Appearing at the: " + key.venue.name);
-                console.log("              At: " + key.venue.city + ', ' + key.venue.region);
-                console.log("              On: " + moment(key.datetime).format("MM/DD/YYYY"));
-                console.log("\n");
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
-}
- */
-//concertThis("Blink182");
+
 
 
 //get name of artist
-var artistName = function(artist) {
+var artistName = function (artist) {
     return artist.name;
 };
 
 //spotify-this-song
 //spotify
 function spotifyThisSong(song) {
-
     //* If no song is provided then your program will default to "The Sign" by Ace of Base.
     if (song === "") {
         song = "The Sign";
     }
 
-
     spotify
         .search(
-        {
-            type: "track",
-            query: song
-        },
-        function (err, data) {
-            if (err) {
-                console.log("Error occurred: " + err);
-                return;
+            {
+                type: "track",
+                query: song
+            },
+            function (err, data) {
+                if (err) {
+                    console.log("Error occurred: " + err);
+                    return;
+                }
+
+                var tracks = data.tracks.items;
+
+                for (var i = 0; i < tracks; i++) {
+                    console.log(i);
+
+                    console.log("Artist: " + tracks[i].artists.map(artistName));
+                    console.log("Song: " + tracks[i].name);
+                    console.log("Preview URL: " + tracks[i].preview_url);
+                    console.log("Album: " + tracks[i].album.name);
+                }
             }
-
-            var tracks = data.tracks.items;
-
-            for (var i = 0; i < tracks; i++) {
-                console.log(i);
-
-                console.log("Artist: " + songs[i].artists.map(artistName));
-                console.log("Song: " + songs[i].name);
-                console.log("Preview URL: " + songs[i].preview_url);
-                console.log("Album: " + songs[i].album.name);
-            }
-        }
         );
 };
 
 
 
+//concert-this
 
+//function to call bandsintown api
+//axios get call 
 
+function getThisBand(artist) {
 
+    var bandURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    //axios call to  bandsintown api
+    axios.get(bandURL)
+        .then(function (response) {
 
+            var bandData = response.data;
+
+            //output if there is no response data
+            if (!bandData.length) {
+                console.log("No info for band: " + artist);
+                return;
+            }
+
+            console.log(artist + "'s upcoming shows are: ");
+
+            //iterate over response object to get name/location/date of event
+            for (var i = 0; i < bandData.length; i++) {
+                var show = bandData[i];
+
+                // Print data about each concert
+                // If a concert doesn't have a region, display the country instead
+                // Use moment to format the date
+                console.log(
+                    show.venue.city +
+                    "," +
+                    (show.venue.region || show.venue.country) +
+                    " at " +
+                    show.venue.name +
+                    " " +
+                    moment(show.datetime).format("MM/DD/YYYY")
+                );
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+}
 
 //movie-this
 
 function movieThis(movie) {
 
     //default movie = Mr Nobody
-// <http://www.imdb.com/title/tt0485947/>
-if(movie = "") {
-    movie = "Mr Nobody";
-}
-// Then run a request with axios to the OMDB API with the movie specified
-axios.get("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy").then(
-    function (response) {
-        console.log(response.data);
-        console.log("The movie's rating is: " + response.data.imdbRating);
-    })
-    .catch(function (error) {
-        console.log(error);
+    // <http://www.imdb.com/title/tt0485947/>
+    if (movie = "") {
+        movie = "Mr Nobody";
     }
-    );//end of spotify-this
+
+    var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+
+    axios.get(omdbURL).then(
+        function (response) {
+      var jsonData = response.data;
+
+      console.log("Title: " + jsonData.Title);
+      console.log("Year: " + jsonData.Year);
+      console.log("Rated: " + jsonData.Rated);
+      console.log("IMDB Rating: " + jsonData.imdbRating);
+      console.log("Country: " + jsonData.Country);
+      console.log("Language: " + jsonData.Language);
+      console.log("Plot: " + jsonData.Plot);
+      console.log("Actors: " + jsonData.Actors);
+      console.log("Rotten Tomatoes Rating: " + jsonData.Ratings[1].Value);
+    });
 };
 
 
 
-
-
-
-
-
-+
 //user choice 
 
-function userChoice (caseData, functionData){
+function userChoice(caseData, functionData) {
     switch (caseData) {
-    case "concert-this":
-        concertThis(functionData);
-        break;
-    case "spotify-this-song":
-        spotifyThisSong(functionData);
-        break;
-    case "movie-this":
-        movieThis(functionData);
-        break;
-    // case "do-what-it-says":
-    //     doWhatItSays(functionData);
-    //     break;
-    default:
-        console.log("My responses are limited.");
+        case "concert-this":
+            getThisBand(functionData);
+            break;
+        case "spotify-this-song":
+            spotifyThisSong(functionData);
+            break;
+        case "movie-this":
+            movieThis(functionData);
+            break;
+        // case "do-what-it-says":
+        //     doWhatItSays(functionData);
+        //     break;
+        default:
+            console.log("My responses are limited.");
     }
 };
 
