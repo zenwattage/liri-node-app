@@ -8,19 +8,18 @@ require("dotenv").config();
 var keys = require("./keys.js");
 
 // axios required for calls to the various API's
-const axios = require('axios');
+const axios = require("axios");
 
 // node-spotify-api for search and request methods 
-var Spotify = require('node-spotify-api');
+var Spotify = require("node-spotify-api");
 
-//create spotify object with keys linked
-var spotify = new Spotify(keys.spotify);
+
 
 // file system interaction package
-const fs = require('fs');
+const fs = require("fs");
 
 // moment npm for date formatting
-var moment = require('moment');
+var moment = require("moment");
 
 //bandsintown
 //"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
@@ -30,6 +29,8 @@ var moment = require('moment');
 
 //console.log(process.argv[2]);
 
+// choice selections
+
 console.log("-----The commands available are below -----");
 console.log("\n   concert-this <band name>");
 console.log("\n   spotify-this-song <song name> ");
@@ -38,7 +39,8 @@ console.log("\n");
 console.log("\n *** end of menu ***")
 console.log("\n");
 
-
+//create spotify object with keys linked
+var spotify = new Spotify(keys.spotify);
 
 
 //get name of artist
@@ -48,36 +50,36 @@ var artistName = function (artist) {
 
 //spotify-this-song
 //spotify
-function spotifyThisSong(song) {
+function spotifyThisSong(songName) {
     //* If no song is provided then your program will default to "The Sign" by Ace of Base.
-    if (song === "") {
-        song = "The Sign";
+    if (songName === undefined) {
+        songName = "The Sign";
     }
 
-    spotify
-        .search(
-            {
-                type: "track",
-                query: song
-            },
-            function (err, data) {
-                if (err) {
-                    console.log("Error occurred: " + err);
-                    return;
-                }
-
-                var tracks = data.tracks.items;
-
-                for (var i = 0; i < tracks; i++) {
-                    console.log(i);
-
-                    console.log("Artist: " + tracks[i].artists.map(artistName));
-                    console.log("Song: " + tracks[i].name);
-                    console.log("Preview URL: " + tracks[i].preview_url);
-                    console.log("Album: " + tracks[i].album.name);
-                }
-            }
-        );
+    spotify.search(
+        {
+          type: "track",
+          query: songName
+        },
+        function(err, data) {
+          if (err) {
+            console.log("Error occurred: " + err);
+            return;
+          }
+    
+          var songs = data.tracks.items;
+    
+          for (var i = 0; i < songs.length; i++) {
+            console.log(i);
+            //map each artist index to aristName
+            console.log("artist(s): " + songs[i].artists.map(artistName));
+            console.log("song name: " + songs[i].name);
+            console.log("preview song: " + songs[i].preview_url);
+            console.log("album: " + songs[i].album.name);
+            console.log("-----------------------------------");
+          }
+        }
+      );
 };
 
 
@@ -132,7 +134,7 @@ function movieThis(movie) {
 
     //default movie = Mr Nobody
     // <http://www.imdb.com/title/tt0485947/>
-    if (movie = "") {
+    if (movie === "") {
         movie = "Mr Nobody";
     }
 
