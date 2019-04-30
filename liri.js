@@ -48,7 +48,6 @@ function getThisBand(artist) {
                 return;
             }
 
-            console.log("\n"+ artist.rainbow + "'s upcoming shows are: ".rainbow);
 
             //iterate over response object to get name/location/date of event
             for (var i = 0; i < bandData.length; i++) {
@@ -62,15 +61,16 @@ function getThisBand(artist) {
                     "," +
                     (show.venue.region || show.venue.country).blue +
                     " at " +
-                    show.venue.name.blue +
+                    show.venue.name.yellow +
                     " " +
                     moment(show.datetime).format("MM/DD/YYYY").magenta
                 );
             }
         }).catch(function (error) {
-            console.log(" ¯\_(ツ)_/¯ ".rainbow + error);
+            console.log("Sorry unknown band or, ".red + "  ¯\\_(ツ)_/¯ <<< ".rainbow + error);
         });
 }
+
 
 
 //spotify-this-song
@@ -88,7 +88,7 @@ function spotifyThisSong(songName) {
         },
         function(err, data) {
           if (err) {
-            console.log(" ¯\_(ツ)_/¯ ".rainbow + error);
+            console.log(" ¯\\_(ツ)_/¯ ".rainbow + error);
             return;
           }
     
@@ -122,21 +122,45 @@ function movieThis(movie) {
     axios.get(omdbURL).then(
         function (response) {
       var movieData = response.data;
+      
         
-      console.log("\n    ( ಠ ͜ʖರೃ)   Welcome to Movie Line  ( ಠ ͜ʖರೃ) ".rainbow);
-      console.log("\nYou searched for: ".grey + movieData.Title);
-      console.log("Made in: ".grey + movieData.Year);
-      console.log("Rated: ".gray + movieData.Rated.blue);
-      console.log("IMDB Rating: ".gray + movieData.imdbRating.yellow);
-      console.log("Country: ".gray + movieData.Country.blue);
-      console.log("Language: ".grey + movieData.Language.magenta);
-      console.log("Plot: ".gray + movieData.Plot.cyan);
-      console.log("Actors: ".gray + movieData.Actors.magenta);
+      console.log("\n    ( ಠ ͜ʖರೃ) <-  Welcome to Movie-Line  -> ( ಠ ͜ʖರೃ) ".rainbow);
+      console.log("\nYou searched for: ".green + movieData.Title);
+      console.log("Made in: ".green + movieData.Year);
+      console.log("Rated: ".green + movieData.Rated.blue);
+      console.log("IMDB Rating: ".green + movieData.imdbRating.yellow);
+      console.log("Country: ".green + movieData.Country.white);
+      console.log("Language: ".green + movieData.Language.magenta);
+      console.log("Plot: ".green + movieData.Plot.cyan);
+      console.log("Actors: ".green + movieData.Actors.magenta);
       console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value);
     }).catch(function (error) {
-        console.log(" ¯\_(ツ)_/¯ ".rainbow + error);
-    });
+        console.log("Sorry unknown movie ->" + " ¯\\_(ツ)_/¯ ".rainbow + "\n");
+    } ) ;
 };
+
+//do-what-it-says
+//get spotify-this-song <song> from file
+
+function doWhatItSays() {
+    //read the file
+    fs.readFile("random.txt", "utf8", function(err, data) {
+
+        console.log(data);
+
+        //split the data at the comma
+        var dataSplit = data.split(",");
+
+        if(dataSplit.length === 2) {
+            userChoice(dataSplit[0], dataSplit[1]);
+        } else if (dataSplit.length === 1) {
+            userChoice(dataSplit[0]);
+        }
+    })
+
+
+}; //end dowhatitsays
+
 
 
 
@@ -153,11 +177,11 @@ function userChoice(caseData, functionData) {
         case "movie-this":
             movieThis(functionData);
             break;
-        // case "do-what-it-says":
-        //     doWhatItSays(functionData);
-        //     break;
+        case "do-what-it-says":
+            doWhatItSays();
+            break;
         default:
-            console.log(" ¯\_(ツ)_/¯ ".rainbow);
+            console.log(" ¯\\_(ツ)_/¯ ".rainbow);
     }
 };
 
