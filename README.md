@@ -35,22 +35,6 @@
 
 ![usage image](https://github.com/zenwattage/liri-node-app/blob/master/usage.JPG)
 
- ``` node liri.js concert-this <artist/band name here> ```
- - will return upcoming concert dates for chosen band
-
-``` node liri.js spotify-this-song <song name here> ```
-
-- will return song info for chosen song
-
-``` node liri.js movie-this  <movie title>```
-
-- will return info for the movie chosen
-
-``` node liri.js do-what-it-says ```
-
-- will return spotify-this-song search for the song name in random.txt
-
-
 
   
 
