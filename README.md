@@ -36,7 +36,6 @@
 
  ``` node liri.js concert-this <artist/band name here> ```
  <img src="https://github.com/zenwattage/liri-node-app/blob/master/concert-this.JPG" width="650">
- https://github.com/zenwattage/liri-node-app/blob/master/concert-this.JPG
 
 ``` node liri.js spotify-this-song <song name here> ```
 
