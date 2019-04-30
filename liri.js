@@ -146,7 +146,7 @@ function doWhatItSays() {
     //read the file
     fs.readFile("random.txt", "utf8", function(err, data) {
 
-        console.log(data);
+        console.log("\n" + data);
 
         //split the data at the comma
         var dataSplit = data.split(",");
