@@ -39,7 +39,7 @@
 
 ``` node liri.js spotify-this-song <song name here> ```
 
-<img src="https://github.com/zenwattage/liri-node-app/blob/master/spotify-this.JPG" width="250">
+<img src="https://github.com/zenwattage/liri-node-app/blob/master/spotify-this.JPG" width="450">
 
 ``` node liri.js movie-this  <movie title>```
 
