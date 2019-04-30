@@ -68,7 +68,7 @@ function getThisBand(artist) {
                 );
             }
         }).catch(function (error) {
-            console.log(error);
+            console.log(" ¯\_(ツ)_/¯ ".rainbow + error);
         });
 }
 
@@ -88,7 +88,7 @@ function spotifyThisSong(songName) {
         },
         function(err, data) {
           if (err) {
-            console.log("Error occurred: " + err);
+            console.log(" ¯\_(ツ)_/¯ ".rainbow + error);
             return;
           }
     
@@ -134,7 +134,7 @@ function movieThis(movie) {
       console.log("Actors: ".gray + movieData.Actors.magenta);
       console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value);
     }).catch(function (error) {
-        console.log(error);
+        console.log(" ¯\_(ツ)_/¯ ".rainbow + error);
     });
 };
 
