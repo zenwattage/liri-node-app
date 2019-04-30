@@ -33,7 +33,7 @@
 
 ## Usage
 
-
+![usage image](usage.jpg)
 
  ``` node liri.js concert-this <artist/band name here> ```
  - will return upcoming concert dates for chosen band
