@@ -41,7 +41,7 @@ function getThisBand(artist) {
         .then(function (response) {
 
             var bandData = response.data;
-
+            
             //output if there is no response data
             if (!bandData.length) {
                 console.log("No info for band: ".red + artist.red);
@@ -99,7 +99,7 @@ function spotifyThisSong(songName) {
             //map each artist index to aristName
             console.log("Artist: ".blue + songs[i].artists.map(artistName));
             console.log("Song name: ".blue + songs[i].name.cyan);
-            console.log("Preview song: ".green + songs[i].preview_url .yellow);
+            console.log("Preview song: ".green + songs[i].preview_url);
             console.log("Album: " + songs[i].album.name.blue);
             console.log("  ٩(⁎❛ᴗ❛⁎)۶ ".rainbow);
           }
@@ -124,15 +124,17 @@ function movieThis(movie) {
       var movieData = response.data;
         
       console.log("\n    ( ಠ ͜ʖರೃ)   Welcome to Movie Line  ( ಠ ͜ʖರೃ) ".rainbow);
-      console.log("\nYou searched for: ".grey + movieData.Title.green);
-      console.log("Made in: ".gray + movieData.Year.cyan);
+      console.log("\nYou searched for: ".grey + movieData.Title);
+      console.log("Made in: ".grey + movieData.Year);
       console.log("Rated: ".gray + movieData.Rated.blue);
       console.log("IMDB Rating: ".gray + movieData.imdbRating.yellow);
       console.log("Country: ".gray + movieData.Country.blue);
       console.log("Language: ".grey + movieData.Language.magenta);
       console.log("Plot: ".gray + movieData.Plot.cyan);
       console.log("Actors: ".gray + movieData.Actors.magenta);
-      console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value.green);
+      console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value);
+    }).catch(function (error) {
+        console.log(error);
     });
 };
 
