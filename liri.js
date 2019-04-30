@@ -1,6 +1,4 @@
 
-
-
 // our local environmental config file - gitignored
 require("dotenv").config();
 
@@ -13,7 +11,8 @@ const axios = require("axios");
 // node-spotify-api for search and request methods 
 var Spotify = require("node-spotify-api");
 
-
+//color for terminal output
+var colors = require('colors');
 
 // file system interaction package
 const fs = require("fs");
@@ -21,23 +20,6 @@ const fs = require("fs");
 // moment npm for date formatting
 var moment = require("moment");
 
-//bandsintown
-//"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
-
-//omdb
-// http://www.omdbapi.com/?i=tt3896198&apikey=2e1c1418
-
-//console.log(process.argv[2]);
-
-// choice selections
-
-console.log("-----The commands available are below -----");
-console.log("\n   concert-this <band name>");
-console.log("\n   spotify-this-song <song name> ");
-console.log("\n   movie-this <movie name> ");
-console.log("\n");
-console.log("\n *** end of menu ***")
-console.log("\n");
 
 //create spotify object with keys linked
 var spotify = new Spotify(keys.spotify);
@@ -48,11 +30,54 @@ var artistName = function (artist) {
     return artist.name;
 };
 
+//concert-this
+//function to call bandsintown api
+//axios get call 
+function getThisBand(artist) {
+
+    var bandURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+    //axios call to  bandsintown api
+    axios.get(bandURL)
+        .then(function (response) {
+
+            var bandData = response.data;
+
+            //output if there is no response data
+            if (!bandData.length) {
+                console.log("No info for band: ".red + artist.red);
+                return;
+            }
+
+            console.log("\n"+ artist.rainbow + "'s upcoming shows are: ".rainbow);
+
+            //iterate over response object to get name/location/date of event
+            for (var i = 0; i < bandData.length; i++) {
+                var show = bandData[i];
+
+                // Print data about each concert
+                // If a concert doesn't have a region, display the country instead
+                // Use moment to format the date
+                console.log(i);
+                console.log(show.venue.city.cyan +
+                    "," +
+                    (show.venue.region || show.venue.country).blue +
+                    " at " +
+                    show.venue.name.blue +
+                    " " +
+                    moment(show.datetime).format("MM/DD/YYYY").magenta
+                );
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+}
+
+
 //spotify-this-song
 //spotify
 function spotifyThisSong(songName) {
     //* If no song is provided then your program will default to "The Sign" by Ace of Base.
-    if (songName === undefined) {
+    if (songName === "") {
         songName = "The Sign";
     }
 
@@ -72,61 +97,15 @@ function spotifyThisSong(songName) {
           for (var i = 0; i < songs.length; i++) {
             console.log(i);
             //map each artist index to aristName
-            console.log("artist(s): " + songs[i].artists.map(artistName));
-            console.log("song name: " + songs[i].name);
-            console.log("preview song: " + songs[i].preview_url);
-            console.log("album: " + songs[i].album.name);
-            console.log("-----------------------------------");
+            console.log("Artist: ".blue + songs[i].artists.map(artistName));
+            console.log("Song name: ".blue + songs[i].name.cyan);
+            console.log("Preview song: ".green + songs[i].preview_url .yellow);
+            console.log("Album: " + songs[i].album.name.blue);
+            console.log("  ٩(⁎❛ᴗ❛⁎)۶ ".rainbow);
           }
         }
       );
 };
-
-
-
-//concert-this
-
-//function to call bandsintown api
-//axios get call 
-
-function getThisBand(artist) {
-
-    var bandURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-    //axios call to  bandsintown api
-    axios.get(bandURL)
-        .then(function (response) {
-
-            var bandData = response.data;
-
-            //output if there is no response data
-            if (!bandData.length) {
-                console.log("No info for band: " + artist);
-                return;
-            }
-
-            console.log(artist + "'s upcoming shows are: ");
-
-            //iterate over response object to get name/location/date of event
-            for (var i = 0; i < bandData.length; i++) {
-                var show = bandData[i];
-
-                // Print data about each concert
-                // If a concert doesn't have a region, display the country instead
-                // Use moment to format the date
-                console.log(
-                    show.venue.city +
-                    "," +
-                    (show.venue.region || show.venue.country) +
-                    " at " +
-                    show.venue.name +
-                    " " +
-                    moment(show.datetime).format("MM/DD/YYYY")
-                );
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
-}
 
 //movie-this
 
@@ -138,21 +117,22 @@ function movieThis(movie) {
         movie = "Mr Nobody";
     }
 
-    var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+    var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&tomatoes=true&apikey=trilogy";
 
     axios.get(omdbURL).then(
         function (response) {
-      var jsonData = response.data;
-
-      console.log("Title: " + jsonData.Title);
-      console.log("Year: " + jsonData.Year);
-      console.log("Rated: " + jsonData.Rated);
-      console.log("IMDB Rating: " + jsonData.imdbRating);
-      console.log("Country: " + jsonData.Country);
-      console.log("Language: " + jsonData.Language);
-      console.log("Plot: " + jsonData.Plot);
-      console.log("Actors: " + jsonData.Actors);
-      console.log("Rotten Tomatoes Rating: " + jsonData.Ratings[1].Value);
+      var movieData = response.data;
+        
+      console.log("\n    ( ಠ ͜ʖರೃ)   Welcome to Movie Line  ( ಠ ͜ʖರೃ) ".rainbow);
+      console.log("\nYou searched for: ".grey + movieData.Title.green);
+      console.log("Made in: ".gray + movieData.Year.cyan);
+      console.log("Rated: ".gray + movieData.Rated.blue);
+      console.log("IMDB Rating: ".gray + movieData.imdbRating.yellow);
+      console.log("Country: ".gray + movieData.Country.blue);
+      console.log("Language: ".grey + movieData.Language.magenta);
+      console.log("Plot: ".gray + movieData.Plot.cyan);
+      console.log("Actors: ".gray + movieData.Actors.magenta);
+      console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value.green);
     });
 };
 
@@ -175,7 +155,7 @@ function userChoice(caseData, functionData) {
         //     doWhatItSays(functionData);
         //     break;
         default:
-            console.log("My responses are limited.");
+            console.log(" ¯\_(ツ)_/¯ ".rainbow);
     }
 };
 
