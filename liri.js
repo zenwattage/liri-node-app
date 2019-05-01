@@ -32,7 +32,6 @@ var artistName = function (artist) {
 
 //concert-this
 //function to call bandsintown api
-//axios get call 
 function getThisBand(artist) {
 
     var bandURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
@@ -41,7 +40,7 @@ function getThisBand(artist) {
         .then(function (response) {
 
             var bandData = response.data;
-            
+
             //output if there is no response data
             if (!bandData.length) {
                 console.log("No info for band: ".red + artist.red);
@@ -54,7 +53,6 @@ function getThisBand(artist) {
                 var show = bandData[i];
 
                 // Print data about each concert
-                // If a concert doesn't have a region, display the country instead
                 // Use moment to format the date
                 console.log("➽  ".yellow + i);
                 console.log(show.venue.city.cyan +
@@ -84,29 +82,29 @@ function spotifyThisSong(songName) {
 
     spotify.search(
         {
-          type: "track",
-          query: songName,
-          limit: 3
+            type: "track",
+            query: songName,
+            limit: 3
         },
-        function(err, data) {
-          if (err) {
-            console.log(" ¯\\_(ツ)_/¯ ".rainbow + error);
-            return;
-          }
-    
-          var songs = data.tracks.items;
-    
-          for (var i = 0; i < songs.length; i++) {
-            console.log("➽  ".yellow + i);
-            //map each artist index to aristName
-            console.log("Artist: ".blue + songs[i].artists.map(artistName));
-            console.log("Song name: ".blue + songs[i].name.cyan);
-            console.log("Preview song: ".green + songs[i].preview_url);
-            console.log("Album: " + songs[i].album.name.blue);
-            console.log("  ٩(⁎❛ᴗ❛⁎)۶ ".rainbow);
-          }
+        function (err, data) {
+            if (err) {
+                console.log(" ¯\\_(ツ)_/¯ ".rainbow + error);
+                return;
+            }
+
+            var songs = data.tracks.items;
+
+            for (var i = 0; i < songs.length; i++) {
+                console.log("➽  ".yellow + i);
+                //map each artist index to each aristName
+                console.log("Artist: ".blue + songs[i].artists.map(artistName));
+                console.log("Song name: ".blue + songs[i].name.cyan);
+                console.log("Preview song: ".green + songs[i].preview_url);
+                console.log("Album: " + songs[i].album.name.blue);
+                console.log("  ٩(⁎❛ᴗ❛⁎)۶ ".rainbow);
+            }
         }
-      );
+    );
 };
 
 //movie-this
@@ -123,22 +121,22 @@ function movieThis(movie) {
 
     axios.get(omdbURL).then(
         function (response) {
-      var movieData = response.data;
-      
-        
-      console.log("\n    ( ಠ ͜ʖರೃ) <-  Welcome to Movie-Line  -> ( ಠ ͜ʖರೃ) ".rainbow);
-      console.log("\nYou searched for: ".green + movieData.Title.yellow);
-      console.log("Made in: ".green + movieData.Year);
-      console.log("Rated: ".green + movieData.Rated.blue);
-      console.log("IMDB Rating: ".green + movieData.imdbRating.yellow);
-      console.log("Country: ".green + movieData.Country.america);
-      console.log("Language: ".green + movieData.Language.magenta);
-      console.log("Plot: ".green + movieData.Plot.white);
-      console.log("Actors: ".green + movieData.Actors.magenta);
-      console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value);
-    }).catch(function (error) {
-        console.log("Sorry unknown movie ➩" + " ¯\\_(ツ)_/¯ ".rainbow + "\n");
-    } ) ;
+            var movieData = response.data;
+
+
+            console.log("\n    ( ಠ ͜ʖರೃ) <-  Welcome to Movie-Line  -> ( ಠ ͜ʖರೃ) ".rainbow);
+            console.log("\nYou searched for: ".green + movieData.Title.yellow);
+            console.log("Made in: ".green + movieData.Year);
+            console.log("Rated: ".green + movieData.Rated.blue);
+            console.log("IMDB Rating: ".green + movieData.imdbRating.yellow);
+            console.log("Country: ".green + movieData.Country.america);
+            console.log("Language: ".green + movieData.Language.magenta);
+            console.log("Plot: ".green + movieData.Plot.white);
+            console.log("Actors: ".green + movieData.Actors.magenta);
+            console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value);
+        }).catch(function (error) {
+            console.log("Sorry unknown movie ➩" + " ¯\\_(ツ)_/¯ ".rainbow + "\n");
+        });
 };
 
 //do-what-it-says
@@ -146,14 +144,14 @@ function movieThis(movie) {
 
 function doWhatItSays() {
     //read the file
-    fs.readFile("random.txt", "utf8", function(err, data) {
+    fs.readFile("random.txt", "utf8", function (err, data) {
 
         console.log("Song from File: " + data);
 
         //split the data at the comma
         var dataSplit = data.split(",");
 
-        if(dataSplit.length === 2) {
+        if (dataSplit.length === 2) {
             userChoice(dataSplit[0], dataSplit[1]);
         } else if (dataSplit.length === 1) {
             userChoice(dataSplit[0]);
