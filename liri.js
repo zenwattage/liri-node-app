@@ -56,7 +56,7 @@ function getThisBand(artist) {
                 // Print data about each concert
                 // If a concert doesn't have a region, display the country instead
                 // Use moment to format the date
-                console.log(i);
+                console.log("➽  ".yellow + i);
                 console.log(show.venue.city.cyan +
                     "," +
                     (show.venue.region || show.venue.country).blue +
@@ -67,7 +67,8 @@ function getThisBand(artist) {
                 );
             }
         }).catch(function (error) {
-            console.log("Sorry unknown band or, ".red + "  ¯\\_(ツ)_/¯ <<< ".rainbow + error);
+            console.log(" ¯\\_(ツ)_/¯ ".rainbow + "Unknown command or band.".red + "  ¯\\_(ツ)_/¯ ".rainbow);
+            console.log("try: " + "node liri.js concert-this BANDNAME".blue);
         });
 }
 
@@ -78,13 +79,14 @@ function getThisBand(artist) {
 function spotifyThisSong(songName) {
     //* If no song is provided then your program will default to "The Sign" by Ace of Base.
     if (songName === "") {
-        songName = "The Sign";
+        songName = "The Sign Ace of Base";
     }
 
     spotify.search(
         {
           type: "track",
-          query: songName
+          query: songName,
+          limit: 5
         },
         function(err, data) {
           if (err) {
@@ -95,7 +97,7 @@ function spotifyThisSong(songName) {
           var songs = data.tracks.items;
     
           for (var i = 0; i < songs.length; i++) {
-            console.log(i);
+            console.log("➽  ".yellow + i);
             //map each artist index to aristName
             console.log("Artist: ".blue + songs[i].artists.map(artistName));
             console.log("Song name: ".blue + songs[i].name.cyan);
@@ -125,17 +127,17 @@ function movieThis(movie) {
       
         
       console.log("\n    ( ಠ ͜ʖರೃ) <-  Welcome to Movie-Line  -> ( ಠ ͜ʖರೃ) ".rainbow);
-      console.log("\nYou searched for: ".green + movieData.Title);
+      console.log("\nYou searched for: ".green + movieData.Title.yellow);
       console.log("Made in: ".green + movieData.Year);
       console.log("Rated: ".green + movieData.Rated.blue);
       console.log("IMDB Rating: ".green + movieData.imdbRating.yellow);
-      console.log("Country: ".green + movieData.Country.white);
+      console.log("Country: ".green + movieData.Country.america);
       console.log("Language: ".green + movieData.Language.magenta);
-      console.log("Plot: ".green + movieData.Plot.cyan);
+      console.log("Plot: ".green + movieData.Plot.white);
       console.log("Actors: ".green + movieData.Actors.magenta);
       console.log("Rotten Tomatoes: ".red + movieData.Ratings[1].Value);
     }).catch(function (error) {
-        console.log("Sorry unknown movie ->" + " ¯\\_(ツ)_/¯ ".rainbow + "\n");
+        console.log("Sorry unknown movie ➩" + " ¯\\_(ツ)_/¯ ".rainbow + "\n");
     } ) ;
 };
 
@@ -146,7 +148,7 @@ function doWhatItSays() {
     //read the file
     fs.readFile("random.txt", "utf8", function(err, data) {
 
-        console.log("\n" + data);
+        console.log("Song from File: " + data);
 
         //split the data at the comma
         var dataSplit = data.split(",");
@@ -181,7 +183,10 @@ function userChoice(caseData, functionData) {
             doWhatItSays();
             break;
         default:
-            console.log(" ¯\\_(ツ)_/¯ ".rainbow);
+            console.log("\n  No Command entered: ".red);
+            console.log("  ¯\\_(ツ)_/¯ ".yellow);
+            console.log("  Your options are: ".cyan);
+            console.log("  concert-this BANDNAME, spotify-this-song SONGNAME, movie-this MOVIE, do-what-it-says ".bgBlue);
     }
 };
 
