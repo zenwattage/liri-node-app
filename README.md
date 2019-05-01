@@ -47,7 +47,7 @@
 
 ``` node liri.js do-what-it-says ```
 
-<img src="https://github.com/zenwattage/liri-node-app/blob/master/do-what-it-says.JPG" width="650">
+<img src="https://media.giphy.com/media/246R1LiF56aKyCuKJC/giphy.gif" width="650">
 
 
 

@@ -86,7 +86,7 @@ function spotifyThisSong(songName) {
         {
           type: "track",
           query: songName,
-          limit: 5
+          limit: 3
         },
         function(err, data) {
           if (err) {
