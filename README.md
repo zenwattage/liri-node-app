@@ -1,20 +1,24 @@
 # liri-node-app
 ~~SIRI~~ LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
 
-## Demo
-[Click here to see a full demo of Liri](https://www.youtube.com/watch?v=wBWvw02D9ao&feature=youtu.be&fbclid=IwAR32bexvGzCffdhB52hbuG2F1g1yC8h-HjIZx-kBhFa9vRYx6QMHU8dkshM)
-
 ## Table of Contents
-
+- [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
 - [Contributing](#contributing)
 
 
+
+
+## Demo
+[Click here to see a full demo of Liri](https://www.youtube.com/watch?v=wBWvw02D9ao&feature=youtu.be&fbclid=IwAR32bexvGzCffdhB52hbuG2F1g1yC8h-HjIZx-kBhFa9vRYx6QMHU8dkshM)
+
+
+
+
 ## Installation
 
- We'll be sending requests using the `axios` package to the Bands in Town, Spotify and OMDB APIs.
 
  ```
  npm install 
@@ -38,11 +42,11 @@
 
 
  ``` node liri.js concert-this <artist/band name here> ```
- <img src="https://github.com/zenwattage/liri-node-app/blob/master/concert-this.JPG" width="650" height="350">
+ <img src="https://media.giphy.com/media/KyCGBqrUMEPPSzDnEE/giphy.gif" width="650" height="350">
 
 ``` node liri.js spotify-this-song <song name here> ```
 
-<img src="https://github.com/zenwattage/liri-node-app/blob/master/spotify-this.JPG" width="650">
+<img src="https://media.giphy.com/media/1yMNH7xu4qEHpdS86j/giphy.gif" width="650">
 
 ``` node liri.js movie-this  <movie title>```
 
