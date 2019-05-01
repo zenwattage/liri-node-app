@@ -161,19 +161,15 @@ function doWhatItSays() {
 
 
 // write
-// This block of code will create a file called "log.txt".
-// It will then print MYOUTPUT in the file
-fs.writeFile("log.txt", "MYOUTPUT", function(err) {
+// append_file.js
+// add a line to a lyric file, using appendFile
+fs.appendFile('empirestate.txt', '\nRight there up on Broadway', (err) => {  
+    if (err) throw err;
+    console.log('The lyrics were updated!');
+});
 
-    // If the code experiences any errors it will log the error to the console.
-    if (err) {
-      return console.log(err);
-    }
-  
-    // Otherwise, it will print: "log.txt was updated!"
-    console.log("log.txt was updated!");
-  
-  });
+
+
 
 
 
