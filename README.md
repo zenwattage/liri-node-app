@@ -43,7 +43,7 @@
 
 ``` node liri.js movie-this  <movie title>```
 
-<img src="https://github.com/zenwattage/liri-node-app/blob/master/movie-this.JPG" width="650">
+<img src="https://media.giphy.com/media/YSqjZU3OgZVqwhLGwk/giphy.gif" width="650">
 
 ``` node liri.js do-what-it-says ```
 
