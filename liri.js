@@ -11,19 +11,17 @@ const axios = require("axios");
 // node-spotify-api for search and request methods 
 var Spotify = require("node-spotify-api");
 
-//color for terminal output
-var colors = require('colors');
-
 // file system interaction package
 const fs = require("fs");
 
 // moment npm for date formatting
 var moment = require("moment");
 
-
 //create spotify object with keys linked
 var spotify = new Spotify(keys.spotify);
 
+//color for terminal output
+var colors = require('colors');
 
 //get name of artist
 var artistName = function (artist) {
@@ -68,7 +66,7 @@ function getThisBand(artist) {
             console.log(" ¯\\_(ツ)_/¯ ".rainbow + "Unknown command or band.".red + "  ¯\\_(ツ)_/¯ ".rainbow);
             console.log("try: " + "node liri.js concert-this BANDNAME".blue);
         });
-}
+}; //end getThisBand
 
 
 
@@ -105,7 +103,7 @@ function spotifyThisSong(songName) {
             }
         }
     );
-};
+};//end spotifyThis
 
 //movie-this
 
@@ -137,7 +135,7 @@ function movieThis(movie) {
         }).catch(function (error) {
             console.log("Sorry unknown movie ➩" + " ¯\\_(ツ)_/¯ ".rainbow + "\n");
         });
-};
+};//end movieThis
 
 //do-what-it-says
 //get spotify-this-song <song> from file
@@ -162,10 +160,7 @@ function doWhatItSays() {
 }; //end dowhatitsays
 
 
-
-
 //user choice 
-
 function userChoice(caseData, functionData) {
     switch (caseData) {
         case "concert-this":
@@ -186,11 +181,12 @@ function userChoice(caseData, functionData) {
             console.log("  Your options are: ".cyan);
             console.log("  concert-this BANDNAME, spotify-this-song SONGNAME, movie-this MOVIE, do-what-it-says ".bgBlue);
     }
-};
+};// end userChoice
 
 //get choice to pass to userChoice
 function getChoice(argOne, argTwo) {
     userChoice(argOne, argTwo);
 };
 
+//get user input from terminal
 getChoice(process.argv[2], process.argv.slice(3).join(" "));
