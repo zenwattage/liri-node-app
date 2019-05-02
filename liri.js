@@ -61,6 +61,14 @@ function getThisBand(artist) {
                     " " +
                     moment(show.datetime).format("MM/DD/YYYY").magenta
                 );
+
+                // add a line to a lyric file, using appendFile
+                fs.appendFile('empirestate.txt', '\nRight there up on Broadway', (err) => {  
+                    if (err) throw err;
+                    console.log('The lyrics were updated!');
+                });
+
+
             }
         }).catch(function (error) {
             console.log(" ¯\\_(ツ)_/¯ ".rainbow + "Unknown command or band.".red + "  ¯\\_(ツ)_/¯ ".rainbow);
@@ -160,13 +168,6 @@ function doWhatItSays() {
 }; //end dowhatitsays
 
 
-// write
-// append_file.js
-// add a line to a lyric file, using appendFile
-fs.appendFile('empirestate.txt', '\nRight there up on Broadway', (err) => {  
-    if (err) throw err;
-    console.log('The lyrics were updated!');
-});
 
 
 
