@@ -1,21 +1,15 @@
 # liri-node-app
 ~~SIRI~~ LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
 
+## Demo
+[Click here to see a full demo of Liri](https://www.youtube.com/watch?v=wBWvw02D9ao&feature=youtu.be&fbclid=IwAR32bexvGzCffdhB52hbuG2F1g1yC8h-HjIZx-kBhFa9vRYx6QMHU8dkshM)
+
 ## Table of Contents
 - [Demo](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
 - [Contributing](#contributing)
-
-
-
-
-## Demo
-[Click here to see a full demo of Liri](https://www.youtube.com/watch?v=wBWvw02D9ao&feature=youtu.be&fbclid=IwAR32bexvGzCffdhB52hbuG2F1g1yC8h-HjIZx-kBhFa9vRYx6QMHU8dkshM)
-
-
-
 
 ## Installation
 
